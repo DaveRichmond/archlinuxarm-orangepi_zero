@@ -2,8 +2,8 @@
 SERIAL_DEVICE = /dev/ttyUSB0
 WGET = wget
 MINITERM = miniterm.py
-CROSS_COMPILE ?= arm-unknown-eabi-
-PYTHON ?= python2
+CROSS_COMPILE ?= arm-none-eabi-
+PYTHON ?= python
 BLOCK_DEVICE ?= /dev/null
 FIND ?= find
 
@@ -12,9 +12,9 @@ UBOOT_BIN = u-boot-sunxi-with-spl.bin
 
 ARCH_TARBALL = ArchLinuxARM-armv7-latest.tar.gz
 
-WORKING_KERNEL = linux-armv7-rc-4.13.rc7-1-armv7h.pkg.tar.xz
+WORKING_KERNEL = linux-armv7-6.9.8-2-armv7h.pkg.tar.xz
 
-UBOOT_VERSION = 2017.09
+UBOOT_VERSION = 2024.07
 UBOOT_TARBALL = u-boot-v$(UBOOT_VERSION).tar.gz
 UBOOT_DIR = u-boot-$(UBOOT_VERSION)
 
@@ -44,7 +44,7 @@ boot.txt:
 	$(WGET) https://raw.githubusercontent.com/archlinuxarm/PKGBUILDs/master/alarm/uboot-sunxi/$@
 
 $(WORKING_KERNEL):
-	$(WGET) http://tardis.tiny-vps.com/aarm/packages/l/linux-armv7-rc/$@
+	$(WGET) http://mirror.archlinuxarm.org/armv7h/core/$@
 
 define part1
 /dev/$(shell basename $(shell $(FIND) /sys/block/$(shell basename $(1))/ -maxdepth 2 -name "partition" -printf "%h"))
