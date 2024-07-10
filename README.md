@@ -7,26 +7,17 @@ Dependencies
 
 - `make`
 - `bsdtar` (`libarchive`)
-- `python2`
+- `python`
 - `uboot-tools`
 - `sudo`
 - `fdisk`
 
-
-Prerequisite
-============
-
-In order to build the image, you need a working ARM toolchain.
-
-Here is a simple way to get one:
-
-    git clone https://github.com/crosstool-ng/crosstool-ng
-    cd crosstool-ng
-    ./bootstrap
-    ./configure --enable-local
-    make
-    ./ct-ng arm-unknown-eabi
-    ./ct-ng build
+Ubuntu will probably need (didn't take full notes, and just felt my way through each time make failed)
+- `python-dev-is-python3`
+- `libssl-dev`
+- `flex`
+- `bison`
+- `gcc-arm-none-eabi`
 
 
 Preparing the files
