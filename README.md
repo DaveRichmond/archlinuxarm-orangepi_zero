@@ -18,6 +18,7 @@ Ubuntu will probably need (didn't take full notes, and just felt my way through 
 - `flex`
 - `bison`
 - `gcc-arm-none-eabi`
+- https://github.com/pengutronix/genimage/
 
 
 Preparing the files
@@ -27,16 +28,15 @@ Run `make` (specifying jobs with `-jX` is supported and recommended).
 
 This will provide:
 
-- the ArchLinuxARM armv7 default rootfs (`ArchLinuxARM-armv7-latest.tar.gz`)
+- the ArchLinuxARM aarch64 default rootfs (`ArchLinuxARM-aarch64-latest.tar.gz`)
 - an u-boot image compiled for the OrangePi Zero (`u-boot-sunxi-with-spl.bin`)
-- a boot script (`boot.scr`) to be copied in `/boot`
 
 
 Installing the distribution
 ===========================
 
-Run `make install BLOCK_DEVICE=/dev/mmcblk0` with the appropriate value for
-`BLOCK_DEVICE`.
+Run `make install`. At the end, the sdcard image will be shown that can be flashed to 
+a card with dd, or balena etcher, or your favourite imaging program
 
 This is running commands similar to [any other AllWinner ArchLinuxARM
 installation][alarm-allwinner].
@@ -47,14 +47,8 @@ installation][alarm-allwinner].
 Ethernet
 ========
 
-In order to get ethernet working, you will need to downgrade to the 4.13-rc7
-since the network support has been [reverted in 54f70f52e3][sunxi-revert]. You
-can install the package with `pacman -U
-/root/linux-armv7-rc-4.13.rc7-1-armv7h.pkg.tar.xz` using the [serial
-interface][opiz-serial].
-
-[sunxi-revert]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=54f70f52e3b3a26164220d98a712a274bd28502f
-[opiz-serial]: http://linux-sunxi.org/Xunlong_Orange_Pi_Zero#Locating_the_UART
+With the out of the box alarm image, a usb ethernet adapter will be required. Wifi is not 
+yet working, but might after a `pacman -Syu`.
 
 
 Goodies

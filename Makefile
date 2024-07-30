@@ -74,7 +74,8 @@ GENIMAGE = $(HOME)/genimage/genimage
 output/sdcard.img: $(ALL) genimage.cfg	
 	mkdir -p $(BUILD_DIR)
 	sudo bsdtar -xpf $(ARCH_TARBALL) -C $(BUILD_DIR)
-	sudo cp $(UBOOT_SCRIPT) $(BUILD_DIR)/boot/
+	sudo mkdir $(BUILD_DIR)/extlinux
+	sudo cp extlinux.conf $(BUILD_DIR)/extlinux
 	sudo $(GENIMAGE) genimage.cfg
 	sudo rm -Rf $(BUILD_DIR)
 
