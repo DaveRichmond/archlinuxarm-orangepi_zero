@@ -58,7 +58,10 @@ $(INPUT_DIR):
 	mkdir -p $(INPUT_DIR)
 
 $(UBOOT_BIN): $(UBOOT_DIR) $(TF_BIN) $(SCP_BIN) $(INPUT_DIR)
-	cd $< && $(MAKE) orangepi_lite2_defconfig && $(MAKE) SCP=$(SCP_BIN) BL31=$(TF_BIN) CROSS_COMPILE=$(CROSS_COMPILE) PYTHON=$(PYTHON)
+	cp custom_config $</.custom_config
+	cd $< && $(MAKE) orangepi_lite2_defconfig && \
+		./scripts/kconfig/merge_config.sh .config .custom_config && \
+		$(MAKE) SCP=$(SCP_BIN) BL31=$(TF_BIN) CROSS_COMPILE=$(CROSS_COMPILE) PYTHON=$(PYTHON)
 	cp $</$@ $(INPUT_DIR)
 
 # Note: non-deterministic output as the image header contains a timestamp and a
